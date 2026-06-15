@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThePunch.com — Dale un golpe al mundo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Inter:wght@400;500;600;700&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red: #D01030;
+            --red-dark: #8B0000;
+            --red-light: #FF2244;
+            --black: #111111;
+            --offwhite: #F7F4F0;
+            --gray: #888;
+            --border: #E0D8D0;
+            --card: #FFFFFF;
+            --ticker-bg: #D01030;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--offwhite);
+            color: var(--black);
+            min-height: 100vh;
+        }
+
+        /* ── TICKER ── */
+        .ticker-wrap {
+            background: var(--black);
+            overflow: hidden;
+            padding: 8px 0;
+            border-bottom: 3px solid var(--red);
+        }
+        .ticker {
+            display: flex;
+            white-space: nowrap;
+            animation: ticker 28s linear infinite;
+        }
+        .ticker span {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 0.06em;
+            padding: 0 40px;
+            text-transform: uppercase;
+        }
+        .ticker span em {
+            color: var(--red-light);
+            font-style: normal;
+        }
+        @keyframes ticker {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ── HEADER ── */
+        header {
+            background: var(--black);
+            padding: 18px 0 14px;
+        }
+        .header-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 2.8rem;
+            line-height: 1;
+            color: #fff;
+            letter-spacing: -1px;
+            text-decoration: none;
+        }
+        .logo span {
+            color: var(--red-light);
+        }
+        .logo-sub {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #aaa;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-top: 3px;
+        }
+        .header-nav {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        .nav-btn {
+            padding: 8px 18px;
+            background: transparent;
+            border: 2px solid #444;
+            border-radius: 999px;
+            color: #ccc;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .2s;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .nav-btn:hover { border-color: var(--red); color: #fff; }
+        .nav-btn.active {
+            background: var(--red);
+            border-color: var(--red);
+            color: #fff;
+        }
+
+        /* ── HERO BAND ── */
+        .hero-band {
+            background: linear-gradient(100deg, var(--red-dark) 0%, var(--red) 60%, #FF5533 100%);
+            padding: 22px 20px;
+            text-align: center;
+        }
+        .hero-band h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.6rem;
+            color: #fff;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .hero-band h2 span {
+            background: rgba(0,0,0,0.25);
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        /* ── LAYOUT ── */
+        .main {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 28px 20px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 24px;
+        }
+        @media (max-width: 700px) {
+            .main { grid-template-columns: 1fr; }
+            .sidebar { order: -1; }
+        }
+
+        /* ── FORM CARD ── */
+        .punch-form-card {
+            background: var(--card);
+            border-radius: 12px;
+            border: 2px solid var(--red);
+            overflow: hidden;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 20px rgba(208,16,48,.08);
+        }
+        .form-title {
+            background: linear-gradient(90deg, var(--red-dark), var(--red));
+            padding: 13px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .form-title h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.05rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .fist-icon {
+            font-size: 1.4rem;
+            line-height: 1;
+        }
+        .form-body {
+            padding: 18px 20px;
+        }
+
+        .field-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        @media (max-width: 500px) {
+            .field-row { grid-template-columns: 1fr; }
+        }
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .field label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--red-dark);
+        }
+        .field input,
+        .field textarea {
+            padding: 9px 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.88rem;
+            color: var(--black);
+            background: #FAFAFA;
+            transition: border-color .2s;
+            width: 100%;
+        }
+        .field input:focus,
+        .field textarea:focus {
+            outline: none;
+            border-color: var(--red);
+            background: #fff;
+        }
+        .field textarea {
+            resize: none;
+            min-height: 80px;
+        }
+
+        .mood-row {
+            margin-bottom: 14px;
+        }
+        .mood-row label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--red-dark);
+            display: block;
+            margin-bottom: 8px;
+        }
+        .mood-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+        .mood-chip {
+            padding: 6px 13px;
+            border: 2px solid var(--border);
+            border-radius: 999px;
+            background: #fff;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .2s;
+            user-select: none;
+        }
+        .mood-chip:hover { border-color: var(--red); }
+        .mood-chip.on {
+            background: var(--red);
+            border-color: var(--red);
+            color: #fff;
+        }
+
+        .photo-row {
+            margin-bottom: 14px;
+        }
+        .photo-label-row {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--red-dark);
+            display: block;
+            margin-bottom: 8px;
+        }
+        .photo-upload-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border: 2px dashed var(--border);
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--gray);
+            cursor: pointer;
+            transition: all .2s;
+            background: #FAFAFA;
+        }
+        .photo-upload-btn:hover {
+            border-color: var(--red);
+            color: var(--red);
+            background: #FFF5F6;
+        }
+        #photoInput { display: none; }
+        .photo-preview {
+            margin-top: 10px;
+            display: none;
+            position: relative;
+            width: 100%;
+        }
+        .photo-preview img {
+            width: 100%;
+            border-radius: 8px;
+            object-fit: cover;
+            max-height: 180px;
+        }
+        .remove-photo {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: rgba(0,0,0,.6);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .char-count {
+            font-size: 0.72rem;
+            color: var(--gray);
+            text-align: right;
+            margin-top: 4px;
+        }
+
+        .punch-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(90deg, var(--red-dark), var(--red));
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.05rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all .2s;
+            box-shadow: 0 4px 14px rgba(208,16,48,.3);
+        }
+        .punch-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(208,16,48,.4);
+        }
+        .punch-btn:active { transform: translateY(0); }
+
+        /* ── FEED ── */
+        .feed-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        .feed-header h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--black);
+        }
+        .feed-count {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--gray);
+        }
+
+        .post-card {
+            background: var(--card);
+            border-radius: 12px;
+            border: 1.5px solid var(--border);
+            overflow: hidden;
+            margin-bottom: 16px;
+            transition: box-shadow .2s, transform .2s;
+            animation: popIn .35s ease;
+        }
+        .post-card:hover {
+            box-shadow: 0 6px 24px rgba(0,0,0,.08);
+            transform: translateY(-1px);
+        }
+        @keyframes popIn {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .post-card.has-photo .post-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .post-body {
+            padding: 14px 16px;
+        }
+
+        .post-top {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            margin-bottom: 10px;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--red-dark), var(--red));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            flex-shrink: 0;
+            letter-spacing: 0.04em;
+        }
+
+        .post-meta { flex: 1; }
+        .post-username {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--black);
+        }
+        .post-time {
+            font-size: 0.72rem;
+            color: var(--gray);
+            margin-top: 1px;
+        }
+
+        .mood-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: #FFF0F1;
+            border: 1.5px solid #FFB3BA;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--red-dark);
+            white-space: nowrap;
+        }
+
+        .post-text {
+            font-size: 0.9rem;
+            line-height: 1.55;
+            color: #222;
+            margin-bottom: 12px;
+        }
+
+        .post-actions {
+            display: flex;
+            gap: 4px;
+            border-top: 1px solid var(--border);
+            padding-top: 10px;
+        }
+        .action-btn {
+            flex: 1;
+            padding: 7px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            transition: all .2s;
+        }
+        .action-btn:hover { background: #FFF0F1; color: var(--red); }
+        .action-btn.liked { color: var(--red); }
+        .action-btn .count { font-size: 0.78rem; }
+
+        /* ── COMMENTS ── */
+        .comments-section {
+            padding: 0 16px 14px;
+            display: none;
+        }
+        .comments-section.open { display: block; }
+        .comment-input-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        .comment-input-row input {
+            flex: 1;
+            padding: 7px 11px;
+            border: 1.5px solid var(--border);
+            border-radius: 999px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.82rem;
+        }
+        .comment-input-row input:focus { outline: none; border-color: var(--red); }
+        .comment-send {
+            padding: 7px 14px;
+            background: var(--red);
+            color: #fff;
+            border: none;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .comment-item {
+            background: #F7F4F0;
+            border-radius: 8px;
+            padding: 8px 11px;
+            margin-bottom: 7px;
+            font-size: 0.82rem;
+        }
+        .comment-author {
+            font-weight: 700;
+            color: var(--red-dark);
+            margin-bottom: 2px;
+            font-size: 0.78rem;
+        }
+        .comment-text { color: #333; }
+
+        /* ── EMPTY STATE ── */
+        .empty-state {
+            text-align: center;
+            padding: 48px 20px;
+            color: var(--gray);
+        }
+        .empty-state .big-icon { font-size: 3rem; margin-bottom: 12px; }
+        .empty-state p { font-size: 0.9rem; font-weight: 600; }
+
+        /* ── SIDEBAR ── */
+        .sidebar-card {
+            background: var(--card);
+            border-radius: 12px;
+            border: 1.5px solid var(--border);
+            overflow: hidden;
+            margin-bottom: 18px;
+        }
+        .sidebar-head {
+            background: var(--black);
+            padding: 10px 16px;
+        }
+        .sidebar-head h4 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.88rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        .sidebar-body { padding: 14px 16px; }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 7px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.82rem;
+        }
+        .stat-row:last-child { border-bottom: none; }
+        .stat-label { color: var(--gray); font-weight: 500; }
+        .stat-value { font-weight: 700; color: var(--red-dark); }
+
+        .mood-leaderboard { list-style: none; }
+        .mood-li {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            padding: 7px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.82rem;
+        }
+        .mood-li:last-child { border-bottom: none; }
+        .mood-li .rank {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            color: var(--red);
+            width: 18px;
+            text-align: center;
+        }
+        .mood-li .mood-name { flex: 1; font-weight: 600; }
+        .mood-li .mood-bar-wrap {
+            width: 60px;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .mood-li .mood-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--red-dark), var(--red));
+            border-radius: 3px;
+        }
+
+        .about-blurb {
+            font-size: 0.82rem;
+            line-height: 1.5;
+            color: #555;
+        }
+        .about-blurb strong { color: var(--red-dark); }
+
+        /* ── TOAST ── */
+        .toast {
+            position: fixed;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: var(--black);
+            color: #fff;
+            padding: 12px 22px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            z-index: 999;
+            transition: transform .35s ease;
+            pointer-events: none;
+            border-left: 4px solid var(--red);
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 500px) {
+            .logo { font-size: 2.1rem; }
+            .hero-band h2 { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+    <div class="ticker">
+        <span>🥊 ThePunch.com — Dale un golpe al mundo &nbsp;•&nbsp; <em>¿Cómo estás hoy?</em> &nbsp;•&nbsp; Compartí tu día &nbsp;•&nbsp; Subí tu estado de ánimo &nbsp;•&nbsp; 🥊 ThePunch.com — Dale un golpe al mundo &nbsp;•&nbsp; <em>¿Cómo estás hoy?</em> &nbsp;•&nbsp; Compartí tu día &nbsp;•&nbsp; Subí tu estado de ánimo &nbsp;•&nbsp;</span>
+        <span>🥊 ThePunch.com — Dale un golpe al mundo &nbsp;•&nbsp; <em>¿Cómo estás hoy?</em> &nbsp;•&nbsp; Compartí tu día &nbsp;•&nbsp; Subí tu estado de ánimo &nbsp;•&nbsp; 🥊 ThePunch.com — Dale un golpe al mundo &nbsp;•&nbsp; <em>¿Cómo estás hoy?</em> &nbsp;•&nbsp; Compartí tu día &nbsp;•&nbsp; Subí tu estado de ánimo &nbsp;•&nbsp;</span>
+    </div>
+</div>
+
+<!-- HEADER -->
+<header>
+    <div class="header-inner">
+        <div>
+            <a class="logo" href="#">The<span>Punch</span>.com</a>
+            <div class="logo-sub">Tu red. Tu golpe. Tu día.</div>
+        </div>
+        <nav class="header-nav">
+            <button class="nav-btn active" onclick="filterFeed('all',this)">Todo</button>
+            <button class="nav-btn" onclick="filterFeed('photo',this)">📷 Fotos</button>
+            <button class="nav-btn" onclick="filterFeed('text',this)">💬 Estados</button>
+        </nav>
+    </div>
+</header>
+
+<!-- HERO BAND -->
+<div class="hero-band">
+    <h2>🥊 Dale tu golpe al mundo — <span id="heroMood">¿qué sentís hoy?</span></h2>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main">
+
+    <!-- ── FEED COLUMN ── -->
+    <div class="feed-column">
+
+        <!-- FORM -->
+        <div class="punch-form-card">
+            <div class="form-title">
+                <span class="fist-icon">🥊</span>
+                <h3>Lanzá tu golpe</h3>
+            </div>
+            <div class="form-body">
+                <div class="field-row">
+                    <div class="field">
+                        <label>Tu nombre</label>
+                        <input type="text" id="inputName" placeholder="¿Quién sos?" maxlength="30">
+                    </div>
+                    <div class="field">
+                        <label>¿De dónde sos?</label>
+                        <input type="text" id="inputPlace" placeholder="País, ciudad, barrio..." maxlength="40">
+                    </div>
+                </div>
+
+                <div class="mood-row">
+                    <label>Estado de ánimo</label>
+                    <div class="mood-chips" id="moodChips">
+                        <div class="mood-chip" data-mood="😤 Furioso">😤 Furioso</div>
+                        <div class="mood-chip" data-mood="🔥 Energético">🔥 Energético</div>
+                        <div class="mood-chip" data-mood="😎 Relajado">😎 Relajado</div>
+                        <div class="mood-chip" data-mood="💪 Motivado">💪 Motivado</div>
+                        <div class="mood-chip" data-mood="😴 Agotado">😴 Agotado</div>
+                        <div class="mood-chip" data-mood="😂 De joda">😂 De joda</div>
+                        <div class="mood-chip" data-mood="🤔 Pensativo">🤔 Pensativo</div>
+                        <div class="mood-chip" data-mood="❤️ Enamorado">❤️ Enamorado</div>
+                        <div class="mood-chip" data-mood="😤 Estresado">😤 Estresado</div>
+                        <div class="mood-chip" data-mood="🎉 Feliz">🎉 Feliz</div>
+                        <div class="mood-chip" id="otroChip" data-mood="otro">✏️ Otro</div>
+                    </div>
+                    <div id="customMoodWrap" style="display:none;margin-top:8px;">
+                        <input type="text" id="customMoodInput" placeholder="Escribí tu estado..." maxlength="30" style="padding:8px 12px;border:2px solid var(--border);border-radius:8px;font-family:'Inter',sans-serif;font-size:.88rem;width:100%;transition:border-color .2s;">
+                    </div>
+                </div>
+
+                <div class="field" style="margin-bottom:12px;">
+                    <label>Tu golpe de hoy</label>
+                    <textarea id="inputText" placeholder="Soltá todo... ¿qué pasó? ¿qué pensás?" maxlength="280"></textarea>
+                    <div class="char-count"><span id="charCount">0</span>/280</div>
+                </div>
+
+                <div class="photo-row">
+                    <span class="photo-label-row">Foto (opcional)</span>
+                    <label class="photo-upload-btn" for="photoInput">
+                        📷 Subir foto
+                    </label>
+                    <input type="file" id="photoInput" accept="image/*">
+                    <div class="photo-preview" id="photoPreview">
+                        <img id="previewImg" src="" alt="preview">
+                        <button class="remove-photo" onclick="removePhoto()">✕</button>
+                    </div>
+                </div>
+
+                <button class="punch-btn" onclick="submitPunch()">💥 PUÑETAZO</button>
+            </div>
+        </div>
+
+        <!-- FEED -->
+        <div class="feed-header">
+            <h3>🔴 En vivo</h3>
+            <span class="feed-count" id="feedCount">0 golpes</span>
+        </div>
+        <div id="feedContainer">
+            <div class="empty-state" id="emptyState">
+                <div class="big-icon">🥊</div>
+                <p>Sin golpes todavía. ¡Sé el primero!</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ── SIDEBAR ── -->
+    <aside class="sidebar">
+
+        <!-- Stats -->
+        <div class="sidebar-card">
+            <div class="sidebar-head"><h4>📊 Estadísticas</h4></div>
+            <div class="sidebar-body">
+                <div class="stat-row">
+                    <span class="stat-label">Total de golpes</span>
+                    <span class="stat-value" id="statTotal">0</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Con foto</span>
+                    <span class="stat-value" id="statPhotos">0</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Total de likes</span>
+                    <span class="stat-value" id="statLikes">0</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Comentarios</span>
+                    <span class="stat-value" id="statComments">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mood ranking -->
+        <div class="sidebar-card">
+            <div class="sidebar-head"><h4>🔥 Mood del momento</h4></div>
+            <div class="sidebar-body">
+                <ul class="mood-leaderboard" id="moodLeaderboard">
+                    <li style="font-size:.82rem;color:var(--gray);padding:8px 0;">Esperando golpes...</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Top Mejores Punch -->
+        <div class="sidebar-card">
+            <div class="sidebar-head"><h4>🏆 Top Mejores Punch</h4></div>
+            <div class="sidebar-body">
+                <ul class="mood-leaderboard" id="topPunchList">
+                    <li style="font-size:.82rem;color:var(--gray);padding:8px 0;">Esperando golpes con likes...</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- About -->
+        <div class="sidebar-card">
+            <div class="sidebar-head"><h4>ℹ️ ¿Qué es esto?</h4></div>
+            <div class="sidebar-body">
+                <p class="about-blurb">
+                    <strong>ThePunch.com</strong> es tu red para soltar lo que sentís.<br><br>
+                    Subí tu estado de ánimo, compartí tu día, poné una foto.<br><br>
+                    Sin filtros. Sin algoritmos. Solo <strong>vos y tu golpe</strong>. 🥊
+                </p>
+            </div>
+        </div>
+
+    </aside>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── DATA ──
+const STORAGE_KEY = 'thepunch_posts_v2';
+let posts = [];
+let selectedMood = '';
+let photoDataUrl = '';
+let activeFilter = 'all';
+let likedPosts = JSON.parse(localStorage.getItem('thepunch_likes') || '{}');
+
+// ── LOAD ──
+function loadPosts() {
+    try {
+        posts = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    } catch(e) { posts = []; }
+}
+function savePosts() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+    localStorage.setItem('thepunch_likes', JSON.stringify(likedPosts));
+}
+
+// ── MOOD CHIPS ──
+document.querySelectorAll('.mood-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+        document.querySelectorAll('.mood-chip').forEach(c => c.classList.remove('on'));
+        chip.classList.add('on');
+        const customWrap = document.getElementById('customMoodWrap');
+        if (chip.dataset.mood === 'otro') {
+            customWrap.style.display = 'block';
+            selectedMood = '';
+            document.getElementById('customMoodInput').focus();
+        } else {
+            customWrap.style.display = 'none';
+            selectedMood = chip.dataset.mood;
+            document.getElementById('heroMood').textContent = selectedMood;
+        }
+    });
+});
+document.getElementById('customMoodInput').addEventListener('input', function() {
+    selectedMood = this.value.trim();
+    if (selectedMood) document.getElementById('heroMood').textContent = selectedMood;
+});
+
+// ── CHAR COUNT ──
+document.getElementById('inputText').addEventListener('input', function() {
+    document.getElementById('charCount').textContent = this.value.length;
+});
+
+// ── PHOTO ──
+document.getElementById('photoInput').addEventListener('change', function() {
+    const file = this.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+        photoDataUrl = e.target.result;
+        document.getElementById('previewImg').src = photoDataUrl;
+        document.getElementById('photoPreview').style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+});
+function removePhoto() {
+    photoDataUrl = '';
+    document.getElementById('photoInput').value = '';
+    document.getElementById('photoPreview').style.display = 'none';
+    document.getElementById('previewImg').src = '';
+}
+
+// ── SUBMIT ──
+function submitPunch() {
+    const name = document.getElementById('inputName').value.trim();
+    const place = document.getElementById('inputPlace').value.trim();
+    const text = document.getElementById('inputText').value.trim();
+
+    if (!name) { showToast('Escribí tu nombre 👤'); return; }
+    if (!selectedMood) { showToast('Elegí un estado de ánimo 🎭'); return; }
+    if (!text) { showToast('Escribí tu golpe 💬'); return; }
+
+    const post = {
+        id: Date.now(),
+        name,
+        place: place || null,
+        mood: selectedMood,
+        text,
+        photo: photoDataUrl || null,
+        timestamp: Date.now(),
+        likes: 0,
+        comments: []
+    };
+
+    posts.unshift(post);
+    savePosts();
+    renderFeed();
+    updateSidebar();
+
+    // Reset
+    document.getElementById('inputName').value = '';
+    document.getElementById('inputPlace').value = '';
+    document.getElementById('inputText').value = '';
+    document.getElementById('charCount').textContent = '0';
+    document.querySelectorAll('.mood-chip').forEach(c => c.classList.remove('on'));
+    selectedMood = '';
+    removePhoto();
+    document.getElementById('heroMood').textContent = '¿qué sentís hoy?';
+
+    showToast('¡Golpe lanzado! 💥');
+}
+
+// ── HELPERS ──
+function esc(str) {
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+}
+function initials(name) {
+    return name.split(' ').map(w=>w[0]||'').join('').toUpperCase().slice(0,2) || '??';
+}
+function timeAgo(ts) {
+    const diff = Date.now() - ts;
+    const s = Math.floor(diff/1000), m = Math.floor(s/60), h = Math.floor(m/60), d = Math.floor(h/24);
+    if (s < 60) return 'Ahora';
+    if (m < 60) return `Hace ${m}m`;
+    if (h < 24) return `Hace ${h}h`;
+    if (d < 7) return `Hace ${d}d`;
+    return new Date(ts).toLocaleDateString('es-AR');
+}
+
+// ── FILTER ──
+function filterFeed(type, btn) {
+    activeFilter = type;
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderFeed();
+}
+
+// ── RENDER FEED ──
+function renderFeed() {
+    const container = document.getElementById('feedContainer');
+    const empty = document.getElementById('emptyState');
+
+    let filtered = posts;
+    if (activeFilter === 'photo') filtered = posts.filter(p => p.photo);
+    if (activeFilter === 'text') filtered = posts.filter(p => !p.photo);
+
+    document.getElementById('feedCount').textContent = `${filtered.length} golpe${filtered.length !== 1 ? 's' : ''}`;
+
+    if (filtered.length === 0) {
+        const msg = activeFilter === 'photo' ? 'No hay fotos todavía 📷' :
+                    activeFilter === 'text' ? 'No hay estados todavía 💬' :
+                    'Sin golpes todavía. ¡Sé el primero!';
+        container.innerHTML = `<div class="empty-state" id="emptyState"><div class="big-icon">🥊</div><p>${msg}</p></div>`;
+        return;
+    }
+
+    container.innerHTML = filtered.map(post => buildPostHTML(post)).join('');
+}
+
+function buildPostHTML(post) {
+    const liked = likedPosts[post.id];
+    const commentsHTML = post.comments.map(c => `
+        <div class="comment-item">
+            <div class="comment-author">${esc(c.name)}</div>
+            <div class="comment-text">${esc(c.text)}</div>
+        </div>
+    `).join('');
+
+    return `
+    <div class="post-card${post.photo ? ' has-photo' : ''}" id="post-${post.id}">
+        ${post.photo ? `<img class="post-img" src="${post.photo}" alt="foto">` : ''}
+        <div class="post-body">
+            <div class="post-top">
+                <div class="avatar">${initials(post.name)}</div>
+                <div class="post-meta">
+                    <div class="post-username">${esc(post.name)}${post.place ? ` <span style="font-weight:400;color:var(--gray);font-size:.78rem;">📍 ${esc(post.place)}</span>` : ''}</div>
+                    <div class="post-time">${timeAgo(post.timestamp)}</div>
+                </div>
+                <span class="mood-badge">${esc(post.mood)}</span>
+            </div>
+            <p class="post-text">${esc(post.text)}</p>
+            <div class="post-actions">
+                <button class="action-btn${liked ? ' liked' : ''}" onclick="toggleLike(${post.id})">
+                    ${liked ? '❤️' : '🤍'} <span class="count" id="likes-${post.id}">${post.likes}</span>
+                </button>
+                <button class="action-btn" onclick="toggleComments(${post.id})">
+                    💬 <span class="count">${post.comments.length}</span>
+                </button>
+                <button class="action-btn" onclick="sharePost(${post.id})">
+                    📤
+                </button>
+            </div>
+        </div>
+        <div class="comments-section" id="comments-${post.id}">
+            <div id="comments-list-${post.id}">${commentsHTML}</div>
+            <div class="comment-input-row">
+                <input type="text" id="comment-name-${post.id}" placeholder="Tu nombre">
+                <input type="text" id="comment-text-${post.id}" placeholder="Tu comentario...">
+                <button class="comment-send" onclick="addComment(${post.id})">→</button>
+            </div>
+        </div>
+    </div>`;
+}
+
+// ── LIKE ──
+function toggleLike(id) {
+    const post = posts.find(p => p.id === id);
+    if (!post) return;
+    if (likedPosts[id]) {
+        post.likes = Math.max(0, post.likes - 1);
+        delete likedPosts[id];
+    } else {
+        post.likes++;
+        likedPosts[id] = true;
+    }
+    savePosts();
+    renderFeed();
+    updateSidebar();
+}
+
+// ── COMMENTS ──
+function toggleComments(id) {
+    const section = document.getElementById(`comments-${id}`);
+    section.classList.toggle('open');
+}
+function addComment(id) {
+    const nameEl = document.getElementById(`comment-name-${id}`);
+    const textEl = document.getElementById(`comment-text-${id}`);
+    const name = nameEl.value.trim();
+    const text = textEl.value.trim();
+    if (!name || !text) { showToast('Completá nombre y comentario'); return; }
+    const post = posts.find(p => p.id === id);
+    if (!post) return;
+    post.comments.push({ name, text, ts: Date.now() });
+    savePosts();
+    renderFeed();
+    updateSidebar();
+    // Reabrir comentarios
+    setTimeout(() => {
+        const s = document.getElementById(`comments-${id}`);
+        if (s) s.classList.add('open');
+    }, 50);
+}
+
+// ── SHARE ──
+function sharePost(id) {
+    const post = posts.find(p => p.id === id);
+    if (!post) return;
+    const text = `${post.name} en ThePunch: "${post.text}" — ${post.mood}`;
+    if (navigator.share) {
+        navigator.share({ title: 'ThePunch.com', text });
+    } else {
+        navigator.clipboard.writeText(text).then(() => showToast('Copiado al portapapeles 📋'));
+    }
+}
+
+// ── SIDEBAR ──
+function updateSidebar() {
+    const total = posts.length;
+    const photos = posts.filter(p => p.photo).length;
+    const totalLikes = posts.reduce((a, p) => a + p.likes, 0);
+    const totalComments = posts.reduce((a, p) => a + p.comments.length, 0);
+
+    document.getElementById('statTotal').textContent = total;
+    document.getElementById('statPhotos').textContent = photos;
+    document.getElementById('statLikes').textContent = totalLikes;
+    document.getElementById('statComments').textContent = totalComments;
+
+    // Top Mejores Punch
+    const topPunches = [...posts].sort((a,b) => b.likes - a.likes).slice(0,5);
+    const topList = document.getElementById('topPunchList');
+    if (topPunches.length === 0 || topPunches[0].likes === 0) {
+        topList.innerHTML = '<li style="font-size:.82rem;color:var(--gray);padding:8px 0;">Esperando golpes con likes...</li>';
+    } else {
+        const medals = ['🥇','🥈','🥉','4️⃣','5️⃣'];
+        topList.innerHTML = topPunches.filter(p => p.likes > 0).map((post, i) => `
+            <li class="mood-li" style="align-items:flex-start;flex-direction:column;gap:3px;padding:9px 0;">
+                <div style="display:flex;align-items:center;gap:7px;width:100%;">
+                    <span class="rank">${medals[i]}</span>
+                    <span style="font-weight:700;font-size:.82rem;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${esc(post.name)}</span>
+                    <span style="font-size:.78rem;font-weight:700;color:var(--red);">❤️ ${post.likes}</span>
+                </div>
+                <p style="font-size:.78rem;color:#555;padding-left:25px;line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">${esc(post.text)}</p>
+            </li>
+        `).join('');
+    }
+    const moodCount = {};
+    posts.forEach(p => {
+        moodCount[p.mood] = (moodCount[p.mood] || 0) + 1;
+    });
+    const sorted = Object.entries(moodCount).sort((a,b) => b[1]-a[1]).slice(0,5);
+    const max = sorted[0]?.[1] || 1;
+    const lb = document.getElementById('moodLeaderboard');
+    if (sorted.length === 0) {
+        lb.innerHTML = '<li style="font-size:.82rem;color:var(--gray);padding:8px 0;">Esperando golpes...</li>';
+    } else {
+        lb.innerHTML = sorted.map(([mood, count], i) => `
+            <li class="mood-li">
+                <span class="rank">${i+1}</span>
+                <span class="mood-name">${esc(mood)}</span>
+                <div class="mood-bar-wrap">
+                    <div class="mood-bar" style="width:${Math.round(count/max*100)}%"></div>
+                </div>
+            </li>
+        `).join('');
+    }
+}
+
+// ── TOAST ──
+function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ── INIT ──
+loadPosts();
+renderFeed();
+updateSidebar();
+
+// Update times every 30s
+setInterval(() => { renderFeed(); }, 30000);
+</script>
+</body>
+</html>
